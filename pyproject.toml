@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "quotessite"
+version = "0.1.0"
+description = "site with quotes"
+authors = ["Nazar Chaban <134311145+Vivern0@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.0.3"
+psycopg2 = "^2.9.9"
+mongoengine = "^0.28.2"
+pillow = "^10.3.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,42 @@
+{% extends 'quotes/base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-8">
+        {% for quote_and_tags in quotes_and_tags %}
+        <div class="quote" itemscope="">
+            <span class="text" itemprop="text">{{ quote_and_tags.quote.quote }}</span>
+            <span>by <small class="author" itemprop="author">{{ quote_and_tags.quote.author }}</small>
+            <a href="{% url 'quotes:author_details' quote_and_tags.author_id %}">(about)</a>
+            </span>
+            <div class="tags">
+                Tags:
+                <!-- <meta class="keywords" itemprop="keywords" content="change,deep-thoughts,thinking,world">  -->
+                
+                {% for tag in quote_and_tags.tags %}
+                <a class="tag" href="{% url 'quotes:tag_details' tag.id %}">{{ tag.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+        <nav>
+            <ul class="pager">
+                
+                <li class="previous">
+                    <a class="{% if not quotes.has_previous %} disabled {% endif %} " href="{% if quotes.has_previous %} {% url 'quotes:index_paginate' quotes.previous_page_number %} {% else %} # {% endif %}">
+                        <span aria-hidden="true">←</span> Previous
+                    </a>
+                </li>
+                
+                
+                <li class="next">
+                    <a class="{% if not quotes.has_next %} disabled {% endif %} " href="{% if quotes.has_next %} {% url 'quotes:index_paginate' quotes.next_page_number %} {% else %} # {% endif %}">Next <span aria-hidden="true">→</span></a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+    </div>
+    
+    {% endblock %}

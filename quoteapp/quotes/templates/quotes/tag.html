@@ -1,0 +1,63 @@
+{% extends "noteapp/base.html" %}
+
+{% block content %}
+
+<form method="post" action="{% url 'noteapp:tag' %}">
+    {% csrf_token %}
+    <div style="padding: 10px;">
+        <label>Enter the tag name: {{form.name}}</label>
+        <span>{{from.errors.name}}</span>
+    </div>
+    <div style="padding: 10px;">
+        <label>
+            Existing tags:
+            <!-- <ul>
+                {% for tag in tags %}
+                <li>{{tag.name}}</li>
+                {% endfor %}
+            </ul> -->
+            <!-- <div class="grid">
+                {% for tag in tags %}
+                <span>{{tag.name}}</span>
+                {% endfor %}
+            </div> -->
+            <div class="tag-list">
+                {% for tag in tags %}
+                    {% if forloop.counter0|divisibleby:5 %}
+                        {% if forloop.counter0 > 0 %}
+                            </ul>
+                        {% endif %}
+                        <ul>
+                    {% endif %}
+                    <li>{{ tag.name }}</li>
+                {% endfor %}
+            </div>
+        </label>
+    </div>
+    <div class="grid">
+        <button type="submit">Submit</button>
+        <button type="reset" class="secondary">Reset</button>
+    </div>
+</form>
+
+<style>
+    .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 50px;
+        margin-left: 20px;
+    }
+
+    .tag-list ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        margin-right: 20px;
+    }
+
+    .tag-list li {
+        margin-bottom: 10px;
+    }
+</style>
+
+{% endblock %}

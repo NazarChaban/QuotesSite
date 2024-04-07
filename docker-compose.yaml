@@ -1,0 +1,46 @@
+version: '3.9'
+
+services:
+  quote-app:
+    container_name: quote_app_db
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  adminer:
+    container_name: db_adminer
+    image: adminer
+    ports:
+      - 8080:8080
+
+  # mongo:
+  #   container_name: mongo_db
+  #   image: mongo:4.4.19-rc0-focal
+  #   volumes:
+  #     - ./mongo_data:/data/db
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: example
+  #   ports:
+  #     - 27017:27017
+
+  # mongo-express:
+  #   container_name: db_express
+  #   image: mongo-express
+  #   environment:
+  #     ME_CONFIG_MONGODB_ADMINUSERNAME: root
+  #     ME_CONFIG_MONGODB_ADMINPASSWORD: example
+  #     ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+  #     ME_CONFIG_BASICAUTH_USERNAME: user
+  #     ME_CONFIG_BASICAUTH_PASSWORD: user123
+  #   ports:
+  #     - 8081:8081
+
+volumes:
+  postgres_data:
+  # mongo_data:
