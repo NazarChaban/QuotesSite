@@ -1,5 +1,7 @@
+from django.shortcuts import redirect, render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.shortcuts import render, get_object_or_404
+from .forms import AuthorForm, QuoteForm
 from .models import Quote, Author, Tag
 from django.db.models import Count
 
@@ -44,3 +46,44 @@ def author_details(request, author_id):
     author = get_object_or_404(Author, id=author_id)
     context = {'author': author}
     return render(request, 'quotes/author_details.html', context)
+
+
+@login_required
+def add_author(request):
+    if request.method == 'POST':
+        form = AuthorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(to='quotes:index')
+        else:
+            context = {'form': form}
+            return render(request, 'quotes/add_author.html', context)
+    
+    context = {'form': AuthorForm()}
+    return render(request, 'quotes/add_author.html', context)
+
+
+@login_required
+def add_quote(request):
+    tags = Tag.objects.all().order_by('name')
+    authors = Author.objects.all()
+
+    if request.method == 'POST':
+        form = QuoteForm(request.POST)
+        if form.is_valid():
+            quote = form.save(commit=False)
+            quote.author = Author.objects.get(fullname=request.POST['author'])
+            # quote.author = Author.objects.get(fullname='E.E. Cummings')
+            choice_tags = Tag.objects.filter(
+                name__in=request.POST.getlist('tags')
+            )
+            quote.save()
+            for tag in choice_tags:
+                quote.tags.add(tag)
+            return redirect(to='quotes:index')
+        else:
+            context = {'form': form, 'tags': tags, 'authors': authors}
+            return render(request, 'quotes/add_quote.html', context)
+
+    context = {'form': QuoteForm(), 'tags': tags, 'authors': authors}
+    return render(request, 'quotes/add_quote.html', context)

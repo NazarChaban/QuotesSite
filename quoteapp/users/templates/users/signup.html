@@ -9,17 +9,17 @@
 <form method="post" action="{% url 'users:signup' %}" class="mb-3">
     {% csrf_token %}
     <div class="mb-3">
-        <label class="form-label">Username:</label>
+        <label class="form-label" for="username">Username:</label>
         {{ form.username }}
         <span class="text-danger">{{ form.errors.username }}</span>
     </div>
     <div class="mb-3">
-        <label class="form-label">Password:</label>
+        <label class="form-label" for="password1">Password:</label>
         {{ form.password1 }}
         <span class="text-danger">{{ form.errors.password1 }}</span>
     </div>
     <div class="mb-3">
-        <label class="form-label">Password confirmation:</label>
+        <label class="form-label" for="password2">Password confirmation:</label>
         {{ form.password2 }}
         <span class="text-danger">{{ form.errors.password2 }}</span>
     </div>

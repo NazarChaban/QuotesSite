@@ -17,11 +17,11 @@
 <form action="{% url 'users:login' %}" method="post">
     {% csrf_token %}
     <div class="mb-3">
-        <label class="form-label">Username:</label>
+        <label class="form-label" for="username">Username:</label>
         {{ form.username }}
     </div>
     <div class="mb-3">
-        <label class="form-label">Password:</label>
+        <label class="form-label" for="password">Password:</label>
         {{ form.password }}
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
