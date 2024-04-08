@@ -84,6 +84,17 @@ body {
   color: red;
 }
 
+ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+
+
 .header-box {
   padding-bottom: 40px;
 }
@@ -103,18 +114,37 @@ body {
 }
 
 ul.pager {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 100px;
+}
+
+.previous, .next {
+  list-style: none;
 }
 
 .pager {
   padding-left: 0;
-  margin: 22px 0;
+  margin: 22px 0 100px 0;
   list-style: none;
   text-align: center;
+  font-family: "Raleway","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
-.pager{
-  font-family: "Raleway","Helvetica Neue",Helvetica,Arial,sans-serif;
+.pager li {
+  display: flex;
+  align-items: center;
+}
+
+.pager li:first-child {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+.pager li:last-child {
+  margin-right: 0;
+  margin-left: auto;
 }
 
 .disabled {
@@ -132,6 +162,7 @@ ul.pager {
   background-color: #ffffff;
   border: 1px solid #dddddd;
   border-radius: 15px;
+  text-decoration: none;
 }
 
 .pager li {
@@ -145,13 +176,3 @@ ul.pager {
 .zyte {
   color: #b02cce;
 } 
-
-ul {
-  display: block;
-  list-style-type: disc;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  padding-inline-start: 40px;
-}

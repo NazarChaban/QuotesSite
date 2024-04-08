@@ -12,8 +12,6 @@
             </span>
             <div class="tags">
                 Tags:
-                <!-- <meta class="keywords" itemprop="keywords" content="change,deep-thoughts,thinking,world">  -->
-                
                 {% for tag in quote_and_tags.tags %}
                 <a class="tag" href="{% url 'quotes:tag_details' tag.id %}">{{ tag.name }}</a>
                 {% endfor %}
