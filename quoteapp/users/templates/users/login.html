@@ -16,22 +16,16 @@
 
 <form action="{% url 'users:login' %}" method="post">
     {% csrf_token %}
-    <div>
-        <label> Username:
-            {{ form.username }}
-        </label>
+    <div class="mb-3">
+        <label class="form-label">Username:</label>
+        {{ form.username }}
     </div>
-
-    <div>
-        <label>Password:
-            {{ form.password }}
-        </label>
+    <div class="mb-3">
+        <label class="form-label">Password:</label>
+        {{ form.password }}
     </div>
-
-    <div class="grid">
-        <button type="submit">Submit</button>
-        <button type="reset" class="secondary">Reset</button>
-    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="reset" class="btn btn-secondary">Reset</button>
 </form>
 
 {% endblock %}
