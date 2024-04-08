@@ -13,7 +13,7 @@
             <div class="tags">
                 Tags:
                 {% for tag in quote_and_tags.tags %}
-                <a class="tag" href="{% url 'quotes:tag_details' tag.id %}">{{ tag.name }}</a>
+                <a class="tag" href="{% url 'quotes:tag_details' tag.id %}" style="text-decoration: none">{{ tag.name }}</a>
                 {% endfor %}
             </div>
         </div>
@@ -35,6 +35,15 @@
             </ul>
         </nav>
     </div>
+    <div class="col-md-4 tags-box">
+        
+        <h2><strong>Top Ten tags</strong></h2>
+        {% for tag, index in top_tags %}
+        <span class="tag-item">
+        <a class="tag" style="font-size: {{index}}px; text-decoration: none" href="{% url 'quotes:tag_details' tag.id %}">{{ tag.name }}</a>
+        </span>
+        {% endfor %}
     </div>
+</div>
     
-    {% endblock %}
+{% endblock %}

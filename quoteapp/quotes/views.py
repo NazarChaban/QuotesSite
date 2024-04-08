@@ -1,22 +1,24 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from .models import Quote, Author, Tag
+from django.db.models import Count
 
 
 def index(request, page=1):
     per_page = 10
     paginator = Paginator(Quote.objects.all(), per_page)
     quotes_on_page = paginator.page(page)
+    top_tags = Tag.objects.annotate(num_quotes=Count('quote')
+        ).order_by('-num_quotes')[:10]
+    font_size = [28 - index*2 for index in range(len(top_tags))]
     context = {
-        'quotes_and_tags': [
-        {
+        'quotes_and_tags': [{
             'quote': quote,
             'tags': quote.tags.all(),
-            'author_id': quote.author.id    # type: ignore
-        }
-        for quote in quotes_on_page
-        ],
+            'author_id': quote.author.id}    # type: ignore
+        for quote in quotes_on_page],
         'quotes': quotes_on_page,
+        'top_tags': zip(top_tags, font_size)
     }
     return render(request, 'quotes/index.html', context)
 
