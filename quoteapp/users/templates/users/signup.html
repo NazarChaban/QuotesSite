@@ -14,6 +14,11 @@
         <span class="text-danger">{{ form.errors.username }}</span>
     </div>
     <div class="mb-3">
+        <label class="form-label" for="username">Email:</label>
+        {{ form.email }}
+        <span class="text-danger">{{ form.errors.email }}</span>
+    </div>
+    <div class="mb-3">
         <label class="form-label" for="password1">Password:</label>
         {{ form.password1 }}
         <span class="text-danger">{{ form.errors.password1 }}</span>

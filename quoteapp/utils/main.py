@@ -1,10 +1,16 @@
 from mongoengine import connect
 from mongo_models import Author as MAuthor, Quote as MQuote
+import environ
 import json
 
+from quoteapp.settings import BASE_DIR
+
+env = environ.Env()
+environ.Env.read_env(BASE_DIR / '.env')
+
 connect(
-    db='hw9_db', host='localhost', port=27017,
-    username='root', password='example'
+    db=env('MONGO_DB_NAME'), host='localhost', port=env('MONGO_PORT'),
+    username=env('MONGO_USERNAME'), password=env('MONGO_PASSWORD')
 )
 
 
@@ -45,7 +51,7 @@ def load_tags_to_json():
     for quote in quotes:
         tags = [tag.name for tag in quote.tags]
         tags_set.update(tags)
-    
+
     tags_list = [{'name': tag} for tag in tags_set]
 
     with open('tags.json', 'w') as file:
